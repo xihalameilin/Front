@@ -25,31 +25,31 @@
 
         <FormItem >
           <Button type="primary" @click="handleSubmit('formCustom')"  style="margin-left: 2%">登录</Button>
-          <Button type="ghost" @click="handleReset('formCustom')" style="margin-left: 5%">重置</Button>
+          <Button  @click="handleReset('formCustom')" style="margin-left: 5%">重置</Button>
           <Button type="default" @click="ForgetPassword" style="margin-left: 5%">忘记密码</Button>
         </FormItem>
       </Form>
 
-      <Modal v-model="model1" :closable='false' :mask-closable=false :width="500" >
-        <h3 slot="header" style="color:#2D8CF0">修改密码</h3>
-        <Form ref="editPasswordForm" :model="editPasswordForm" :label-width="100" label-position="right" :rules="ruleCustom">
-          <FormItem label="邮箱" prop="Email">
-            <Input v-model="editPasswordForm.Email" placeholder="请输入注册时输入的邮箱" ></Input>
-          </FormItem>
-          <FormItem label="验证码" prop="IdentityCode">
-            <Input v-model="editPasswordForm.IdentityCode" placeholder="请输入验证码" style="float: left;width: 50%" ></Input>
-            <Button type="default" @click="sendIdentityCode" style="float: left;margin-left: 10%">发送验证码</Button>
-          </FormItem>
-          <FormItem label="新密码" prop="newPass">
-            <Input type="password" v-model="editPasswordForm.newPass" placeholder="请输入新密码" ></Input>
-          </FormItem>
-        </Form>
-        <div slot="footer">
-          <Button type="text" >取消</Button>
-          <Button type="primary"  @click="saveEditPass">保存</Button>
-          <Button type="ghost" @click="handleReset('editPasswordForm')" style="margin-left: 8px">重置</Button>
-        </div>
-      </Modal>
+      <!--<Modal v-model="model1" :closable='false' :mask-closable=false :width="500" >-->
+        <!--<h3 slot="header" style="color:#2D8CF0">修改密码</h3>-->
+        <!--<Form ref="editPasswordForm" :model="editPasswordForm" :label-width="100" label-position="right" :rules="ruleCustom">-->
+          <!--<FormItem label="邮箱" prop="Email">-->
+            <!--<Input v-model="editPasswordForm.Email" placeholder="请输入注册时输入的邮箱" ></Input>-->
+          <!--</FormItem>-->
+          <!--<FormItem label="验证码" prop="IdentityCode">-->
+            <!--<Input v-model="editPasswordForm.IdentityCode" placeholder="请输入验证码" style="float: left;width: 50%" ></Input>-->
+            <!--<Button type="default" @click="sendIdentityCode" style="float: left;margin-left: 10%">发送验证码</Button>-->
+          <!--</FormItem>-->
+          <!--<FormItem label="新密码" prop="newPass">-->
+            <!--<Input type="password" v-model="editPasswordForm.newPass" placeholder="请输入新密码" ></Input>-->
+          <!--</FormItem>-->
+        <!--</Form>-->
+        <!--<div slot="footer">-->
+          <!--<Button type="text" >取消</Button>-->
+          <!--<Button type="primary"  @click="saveEditPass">保存</Button>-->
+          <!--<Button type="ghost" @click="handleReset('editPasswordForm')" style="margin-left: 8px">重置</Button>-->
+        <!--</div>-->
+      <!--</Modal>-->
 
       <Form v-show="tagdisplay.flag2" ref="registerformCustom" :model="registerformCustom" :rules="ruleCustom" :label-width="80">
         <FormItem label="用户名：" prop="registeruserID" style="margin-top: 20px">
@@ -69,7 +69,7 @@
         </FormItem>
 
         <FormItem label="电话：" prop="registerTelephone">
-          <i-input type="telephone" v-model="registerformCustom.registerTelephone" style="width: 250px">
+          <i-input type="tel" v-model="registerformCustom.registerTelephone" style="width: 250px">
             <Icon type="ios-call" slot="prepend"></Icon>
           </i-input>
         </FormItem>
@@ -98,7 +98,7 @@
 
         <FormItem >
           <Button type="primary" @click="handleSubmit('registerformCustom')" style="float: left" >注册</Button>
-          <Button type="ghost" @click="handleReset('registerformCustom')" style="margin-left: 5%">重置</Button>
+          <Button  @click="handleReset('registerformCustom')" style="margin-left: 5%">重置</Button>
         </FormItem>
 
       </Form>
@@ -108,23 +108,23 @@
 
     </div>
 
-    <Modal v-model="showModel" :closable='false' :mask-closable=false :width="500">
-      <h3 slot="header" style="color:#2D8CF0">新增地址</h3>
+    <!--<Modal v-model="showModel" :closable='false' :mask-closable=false :width="500">-->
+      <!--<h3 slot="header" style="color:#2D8CF0">新增地址</h3>-->
 
-      <Cascader :data="addressdata" v-model="newaddress"></Cascader>
+      <!--<Cascader :data="addressdata" v-model="newaddress"></Cascader>-->
 
-      <label class="form-inline">详细地址：
-        <input type="text" class="form-control" v-model="detailaddress" style="width: 250px" placeholder="详细地址"/>
-      </label>
-      <Table :columns="columns" :data="data"></Table>
-      <Button type="primary"  @click="addnewaddress" style="margin-left: 170px" >确认此地址</Button>
+      <!--<label class="form-inline">详细地址：-->
+        <!--<input type="text" class="form-control" v-model="detailaddress" style="width: 250px" placeholder="详细地址"/>-->
+      <!--</label>-->
+      <!--<Table :columns="columns" :data="data"></Table>-->
+      <!--<Button type="primary"  @click="addnewaddress" style="margin-left: 170px" >确认此地址</Button>-->
 
 
 
-      <div slot="footer">
-        <Button type="primary"  @click="disappear">确定</Button>
-      </div>
-    </Modal>
+      <!--<div slot="footer">-->
+        <!--<Button type="primary"  @click="disappear">确定</Button>-->
+      <!--</div>-->
+    <!--</Modal>-->
 
 
 
@@ -430,6 +430,28 @@
 
     },
     methods: {
+      f2(){
+        this.$http.get("api/login").then(function (response) {
+          alert(response.data)
+        })
+      },
+
+      f(){
+        this.$http({
+          url:"api/user/5",
+          method:'post',
+          headers:{"Content-Type": "application/json;charset=UTF-8"
+          },
+          data:JSON.stringify({
+            "id":1,
+            "name":"lml"
+          })
+        }).then(function (response) {
+          alert(response.data)
+        }).catch(function (error) {
+          alert(error)
+        })
+      },
 
       getShopID(){
         var self = this
@@ -663,9 +685,9 @@
       handleSubmit (name) {
         this.$refs[name].validate((valid) => {
           if (valid) {
-            this.$Message.success('Success!');
+            //this.$Message.success('Success!');
             if(this.tagdisplay.flag1==true)
-              this.login()
+              this.f()
             else
               this.register()
           } else {
