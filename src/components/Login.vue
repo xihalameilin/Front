@@ -24,9 +24,9 @@
 
 
         <FormItem >
-          <Button type="primary" @click="handleSubmit('formCustom')"  style="margin-left: 2%">登录</Button>
-          <Button  @click="handleReset('formCustom')" style="margin-left: 5%">重置</Button>
-          <Button type="default" @click="ForgetPassword" style="margin-left: 5%">忘记密码</Button>
+          <Button type="primary" @click="handleSubmit('formCustom')" style="float: left" >登录</Button>
+          <Button  @click="handleReset('formCustom')" style="float: left;margin-left: 5px">重置</Button>
+          <Button type="default" @click="ForgetPassword" style="float: left;margin-left: 5px">忘记密码</Button>
         </FormItem>
       </Form>
 
@@ -437,20 +437,30 @@
       },
 
       f(){
-        this.$http({
-          url:"api/user/5",
-          method:'post',
-          headers:{"Content-Type": "application/json;charset=UTF-8"
-          },
-          data:JSON.stringify({
-            "id":1,
-            "name":"lml"
+          this.$store.dispatch("showFooter")
+          var self = this
+          this.$http({
+            url:"api/user/5",
+            method:'post',
+            headers:{"Content-Type": "application/json;charset=UTF-8"
+            },
+            data:JSON.stringify({
+              "id":1,
+              "name":"lml"
+            })
+          }).then(function (response) {
+            setTimeout(function () {
+              self.$store.dispatch("hideFooter")
+            },1000)
+            self.$router.push({
+              name:'home'
+            })
+
+          }).catch(function (error) {
+            alert(error)
           })
-        }).then(function (response) {
-          alert(response.data)
-        }).catch(function (error) {
-          alert(error)
-        })
+
+
       },
 
       getShopID(){
@@ -775,6 +785,7 @@
     text-decoration:none;
   }
   .header .switch .switch_btn_focus:hover {
+    color:#333;
     text-decoration:none;
   }
   #switch_bottom {

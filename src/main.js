@@ -8,6 +8,12 @@ import iView from 'iview';
 import 'iview/dist/styles/iview.css';
 import axios from 'axios';
 
+import store from './store/index'//引入store
+
+
+
+Vue.use(store)
+
 Vue.use(iView);
 axios.defaults.headers = {
   "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8"
@@ -23,6 +29,7 @@ Vue.config.productionTip = false
 new Vue({
   el: '#app',
   router,
+  store,
   components: { App },
   template: '<App/>'
 })
