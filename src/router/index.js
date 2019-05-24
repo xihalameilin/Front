@@ -7,6 +7,11 @@ import home from '@/components/Home'
 import loading from '@/components/Loading'
 import table from '@/components/Table'
 
+import page1 from '@/components/Page1'
+import page2 from '@/components/Page2'
+import page3 from '@/components/Page3'
+import page21 from '@/components/Page21'
+
 Vue.use(Router)
 
 export default new Router({
@@ -20,7 +25,42 @@ export default new Router({
     {
       path: '/home',
       name: 'home',
-      component: home
+      component: home,
+      redirect:'/page1',
+      children:[
+        {
+          path: '/page1',
+          name:'page1',
+          component:page1
+        },
+        {
+          path: '/page2',
+          name:'page2',
+          component:page2,
+          redirect:'/page21',
+          children:[
+            {
+              path: '/page21',
+              name:'page21',
+              component:page21
+            },
+            {
+              path:'*',
+              redirect:'/page21'
+            }
+          ]
+        },
+        {
+          path: '/page3',
+          name:'page3',
+          component:page3
+        },
+
+        {
+          path:'*',
+          redirect:'/page1'
+        }
+      ]
     },
     {
       path: '/loading',

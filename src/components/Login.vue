@@ -566,46 +566,18 @@
 
       //登录方法
       login(){
-
-
-
         var self=this
-        var identity;
         var userID=this.formCustom.userID
-        this.$http.get('api/LoginController/login/'+this.formCustom.userID+"/"+this.formCustom.password,{
+        this.$http.post('/loginVerify/'+this.formCustom.userID+"/"+this.formCustom.password,{
         })
           .then(function (response) {
-            identity=response.data
-            window.localStorage.removeItem("identity")
-            if(identity=='管理员') {
-              window.localStorage.setItem("identity","管理员")
-              self.$router.push({
-                name: 'admin',
-              })
-            }
-            else if(identity=='会员'){
-              window.localStorage.setItem("identity","会员")
-              self.$router.push({
-                name: 'user',
-              })
-            }
-            else if(identity=='餐厅人员'){
-              window.localStorage.setItem("identity","餐厅人员")
-              self.$router.push({
-                name: 'requestor',
-              })
-            }
-            else {
-              self.$Message.error(identity)
-            }
+            alert(response.data)
           } )
           .catch(function (error) {alert(error) })
-
         window.localStorage.removeItem("userID");
         //将userid保存到localstorage
         window.localStorage.setItem("userID",userID)
-        // var curtime = new Date().getTime()
-        // window.localStorage.setItem("time",JSON.stringify(curtime))
+
       },
 
       //注册
@@ -697,7 +669,7 @@
           if (valid) {
             //this.$Message.success('Success!');
             if(this.tagdisplay.flag1==true)
-              this.f()
+              this.login()
             else
               this.register()
           } else {
