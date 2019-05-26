@@ -14,6 +14,7 @@ import page21 from '@/components/Page21'
 import header from '@/components/Header'
 import usertag from '@/components/UserTag'
 import message from '@/components/Message'
+import detail from '@/components/Detail'
 
 Vue.use(Router)
 
@@ -23,6 +24,11 @@ export default new Router({
       path: '/',
       name: 'login',
       component: Login
+    },
+    {
+      path: '/detail',
+      name: 'detail',
+      component: detail
     },
     {
       path: '/list',
