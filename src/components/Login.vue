@@ -24,9 +24,9 @@
 
 
         <FormItem >
-          <Button type="primary" @click="handleSubmit('formCustom')"  style="margin-left: 2%">登录</Button>
-          <Button  @click="handleReset('formCustom')" style="margin-left: 5%">重置</Button>
-          <Button type="default" @click="ForgetPassword" style="margin-left: 5%">忘记密码</Button>
+          <Button type="primary" @click="handleSubmit('formCustom')" style="float: left" >登录</Button>
+          <Button  @click="handleReset('formCustom')" style="float: left;margin-left: 5px">重置</Button>
+          <Button type="default" @click="ForgetPassword" style="float: left;margin-left: 5px">忘记密码</Button>
         </FormItem>
       </Form>
 
@@ -437,20 +437,30 @@
       },
 
       f(){
-        this.$http({
-          url:"api/user/5",
-          method:'post',
-          headers:{"Content-Type": "application/json;charset=UTF-8"
-          },
-          data:JSON.stringify({
-            "id":1,
-            "name":"lml"
+          this.$store.dispatch("showFooter")
+          var self = this
+          this.$http({
+            url:"api/user/5",
+            method:'post',
+            headers:{"Content-Type": "application/json;charset=UTF-8"
+            },
+            data:JSON.stringify({
+              "id":1,
+              "name":"lml"
+            })
+          }).then(function (response) {
+            setTimeout(function () {
+              self.$store.dispatch("hideFooter")
+            },1000)
+            self.$router.push({
+              name:'home'
+            })
+
+          }).catch(function (error) {
+            alert(error)
           })
-        }).then(function (response) {
-          alert(response.data)
-        }).catch(function (error) {
-          alert(error)
-        })
+
+
       },
 
       getShopID(){
@@ -556,46 +566,18 @@
 
       //登录方法
       login(){
-
-
-
         var self=this
-        var identity;
         var userID=this.formCustom.userID
-        this.$http.get('api/LoginController/login/'+this.formCustom.userID+"/"+this.formCustom.password,{
+        this.$http.post('/loginVerify/'+this.formCustom.userID+"/"+this.formCustom.password,{
         })
           .then(function (response) {
-            identity=response.data
-            window.localStorage.removeItem("identity")
-            if(identity=='管理员') {
-              window.localStorage.setItem("identity","管理员")
-              self.$router.push({
-                name: 'admin',
-              })
-            }
-            else if(identity=='会员'){
-              window.localStorage.setItem("identity","会员")
-              self.$router.push({
-                name: 'user',
-              })
-            }
-            else if(identity=='餐厅人员'){
-              window.localStorage.setItem("identity","餐厅人员")
-              self.$router.push({
-                name: 'requestor',
-              })
-            }
-            else {
-              self.$Message.error(identity)
-            }
+            alert(response.data)
           } )
           .catch(function (error) {alert(error) })
-
         window.localStorage.removeItem("userID");
         //将userid保存到localstorage
         window.localStorage.setItem("userID",userID)
-        // var curtime = new Date().getTime()
-        // window.localStorage.setItem("time",JSON.stringify(curtime))
+
       },
 
       //注册
@@ -687,7 +669,7 @@
           if (valid) {
             //this.$Message.success('Success!');
             if(this.tagdisplay.flag1==true)
-              this.f()
+              this.login()
             else
               this.register()
           } else {
@@ -775,6 +757,7 @@
     text-decoration:none;
   }
   .header .switch .switch_btn_focus:hover {
+    color:#333;
     text-decoration:none;
   }
   #switch_bottom {

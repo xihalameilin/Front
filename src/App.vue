@@ -1,13 +1,26 @@
 <template>
   <div id="app">
-
+    <my_header></my_header>
     <router-view/>
+    <Modal v-model="isShow" footer-hide><loading></loading></Modal>
+
   </div>
 </template>
 
 <script>
-export default {
-  name: 'App'
+  import loading from '@/components/Loading'
+  import my_header from '@/components/Header'
+  export default {
+    components:{
+      loading,
+      my_header
+    },
+    computed:{
+      isShow(){
+        return this.$store.getters.isShow;
+      }
+    },
+name: 'App'
 }
 </script>
 

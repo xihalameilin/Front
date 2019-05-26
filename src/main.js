@@ -8,12 +8,36 @@ import iView from 'iview';
 import 'iview/dist/styles/iview.css';
 import axios from 'axios';
 
+import store from './store/index'//引入store
+
+
+
+Vue.use(store)
+
 Vue.use(iView);
 axios.defaults.headers = {
   "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8"
 }
 
 Vue.prototype.$http=axios
+Vue.prototype.$setCookie=function setCookie(cname,cvalue,exmins){
+  var d = new Date();
+  d.setTime(d.getTime()+(exmins*60*1000));
+  var expires = "expires="+d.toGMTString();
+  document.cookie = cname + "=" + cvalue + "; " + expires;
+}
+
+Vue.prototype.$getCookie=function getCookie(cname){
+  var name = cname + "=";
+  var ca = document.cookie.split(';');
+  for(var i=0; i<ca.length; i++) {
+    var c = ca[i].trim();
+    if (c.indexOf(name)==0) {
+      return c.substring(name.length,c.length);
+    }
+  }
+  return "";
+}
 
 
 
@@ -23,6 +47,7 @@ Vue.config.productionTip = false
 new Vue({
   el: '#app',
   router,
+  store,
   components: { App },
   template: '<App/>'
 })
