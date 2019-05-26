@@ -39,7 +39,7 @@
         <Tag type="border" color="warning" style="float: left;margin-left: 6%;margin-top: 15%;font-size: 18px">未知</Tag>
       </div>
     </div>
-    <Page @on-change="pageChange" :total="100" page-size="10" show-elevator style="float: left;margin-left: 16%;margin-top: 4%;font-size: 16px"/>
+    <Page @on-change="pageChange" :total="100" page-size="10" show-elevator style="float: left;margin-left: 16%;margin-top: 6%;font-size: 16px"/>
   </div>
 </template>
 
