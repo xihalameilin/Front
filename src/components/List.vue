@@ -15,21 +15,21 @@
       <div style="float: left;margin-left: -23%;margin-top: 12%;width:90%;height:2px;background-color: rgba(0,0,0,0.42)"></div>
       <div>
         <p class="title" title="南大讲座" style="float: left;margin-left: 5%;margin-top: 4%;">讲座</p>
-        <Tag type="border" color="primary" style="float: left;margin-left: -11%;margin-top: 15%;font-size: 18px">天文</Tag>
-        <Tag type="border" color="success" style="float: left;margin-left: 5%;margin-top: 15%;font-size: 18px">数学</Tag>
-        <Tag type="border" color="error" style="float: left;margin-left: 6%;margin-top: 15%;font-size: 18px">文学</Tag>
-        <Tag type="border" color="warning" style="float: left;margin-left: 6%;margin-top: 15%;font-size: 18px">艺术</Tag>
-        <Tag type="border" color="primary" style="float: left;margin-left: 5.5%;margin-top: 4%;font-size: 18px">天文</Tag>
-        <Tag type="border" color="success" style="float: left;margin-left: 5%;margin-top: 4%;font-size: 18px">数学</Tag>
-        <Tag type="border" color="error" style="float: left;margin-left: 6%;margin-top: 4%;font-size: 18px">文学</Tag>
-        <Tag type="border" color="warning" style="float: left;margin-left: 6%;margin-top: 4%;font-size: 18px">艺术</Tag>
+        <Tag @click.native="searchTag('天')" type="border" color="primary" style="float: left;margin-left: -11%;margin-top: 15%;font-size: 18px">天文</Tag>
+        <Tag @click.native="searchTag('天')" type="border" color="success" style="float: left;margin-left: 5%;margin-top: 15%;font-size: 18px">数学</Tag>
+        <Tag @click.native="searchTag('天')" type="border" color="error" style="float: left;margin-left: 6%;margin-top: 15%;font-size: 18px">文学</Tag>
+        <Tag @click.native="searchTag('天')" type="border" color="warning" style="float: left;margin-left: 6%;margin-top: 15%;font-size: 18px">艺术</Tag>
+        <Tag @click.native="searchTag('天')" type="border" color="primary" style="float: left;margin-left: 5.5%;margin-top: 4%;font-size: 18px">天文</Tag>
+        <Tag @click.native="searchTag('天')" type="border" color="success" style="float: left;margin-left: 5%;margin-top: 4%;font-size: 18px">数学</Tag>
+        <Tag @click.native="searchTag('天')" type="border" color="error" style="float: left;margin-left: 6%;margin-top: 4%;font-size: 18px">文学</Tag>
+        <Tag @click.native="searchTag('天')" type="border" color="warning" style="float: left;margin-left: 6%;margin-top: 4%;font-size: 18px">艺术</Tag>
       </div>
       <div>
         <p class="title" title="校园活动" style="float: left;margin-left: 5%;margin-top: 4%;">活动</p>
-        <Tag type="border" color="primary" style="float: left;margin-left: -11%;margin-top: 15%;font-size: 18px">音乐</Tag>
-        <Tag type="border" color="success" style="float: left;margin-left: 5%;margin-top: 15%;font-size: 18px">未知</Tag>
-        <Tag type="border" color="error" style="float: left;margin-left: 6%;margin-top: 15%;font-size: 18px">未知</Tag>
-        <Tag type="border" color="warning" style="float: left;margin-left: 6%;margin-top: 15%;font-size: 18px">未知</Tag>
+        <Tag @click.native="searchTag('天')" type="border" color="primary" style="float: left;margin-left: -11%;margin-top: 15%;font-size: 18px">音乐</Tag>
+        <Tag @click.native="searchTag('天')" type="border" color="success" style="float: left;margin-left: 5%;margin-top: 15%;font-size: 18px">未知</Tag>
+        <Tag @click.native="searchTag('天')" type="border" color="error" style="float: left;margin-left: 6%;margin-top: 15%;font-size: 18px">未知</Tag>
+        <Tag @click.native="searchTag('天')" type="border" color="warning" style="float: left;margin-left: 6%;margin-top: 15%;font-size: 18px">未知</Tag>
       </div>
       <div>
         <p class="title" title="比赛信息" style="float: left;margin-left: 5%;margin-top: 4%;">比赛</p>
@@ -76,6 +76,11 @@
       }
     },
     methods:{
+
+      searchTag(name){
+        alert("123")
+        alert(name)
+      },
       getData(index){
         var self = this
         this.$http.get("api/getArticles/"+index)
