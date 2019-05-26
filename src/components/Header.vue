@@ -257,8 +257,6 @@
     overflow: hidden;
     height: 150px;
     width: 100%;
-    opacity: 0.8;
-
     background-image: url('../images/njuLogo.png');
     background-size: cover;
     border: 1px solid white;
