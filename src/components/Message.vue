@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Table border  :columns="columns" :data="data" style="width: 120em"></Table>
+    <Table border  :columns="columns" :data="data" style="width: 100%"></Table>
   </div>
 
 </template>
