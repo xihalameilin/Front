@@ -26,9 +26,7 @@
     },
 
     methods:{
-      jump(name){
-        alert(name)
-      }
+
     }
   }
 </script>
