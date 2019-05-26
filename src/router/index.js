@@ -6,6 +6,7 @@ import loading from '@/components/Loading'
 import table from '@/components/Table'
 
 import list from '@/components/List'
+import tagPage from '@/components/TagPage'
 
 import page1 from '@/components/Page1'
 import page2 from '@/components/Page2'
@@ -16,6 +17,7 @@ import usertag from '@/components/UserTag'
 import message from '@/components/Message'
 import detail from '@/components/Detail'
 import concern from '@/components/Concern'
+import collection from '@/components/ListPage'
 
 Vue.use(Router)
 
@@ -25,11 +27,6 @@ export default new Router({
       path: '/',
       name: 'login',
       component: Login
-    },
-    {
-      path: '/concern',
-      name: 'concern',
-      component: concern
     },
     {
       path: '/detail',
@@ -42,19 +39,42 @@ export default new Router({
       component: list
     },
     {
-      path: '/message',
-      name: 'message',
-      component: message
-    },
-    {
       path: '/usertag',
       name: 'usertag',
-      component: usertag
+      component: usertag,
+      redirect:'/collection',
+      children:[
+        {
+          path: '/collection',
+          name:'collection',
+          component:collection
+        },
+        {
+          path: '/concern',
+          name:'concern',
+          component:concern
+        },
+        {
+          path: '/message',
+          name: 'message',
+          component: message
+        },
+        {
+          path:'*',
+          redirect:'/collection'
+        }
+      ]
     },
+
     {
       path: '/header',
       name: 'header',
       component: header
+    },
+    {
+      path: '/tagPage',
+      name: 'tagPage',
+      component: tagPage
     },
 
     {
