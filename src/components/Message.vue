@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="float: left;margin-left: 5%;width:65%;margin-top: 2%">
     <Table border  :columns="columns" :data="data" style="width: 100%"></Table>
   </div>
 

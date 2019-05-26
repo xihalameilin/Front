@@ -1,8 +1,8 @@
 <template>
   <div>
-    <div v-for="item in personList" style="float: left;width: 20%">
-      <Icon type="md-person" size="100"></Icon>
-      <h1 @click="jump(item.name)">{{item.name}}</h1>
+    <div v-for="item in personList" style="float: left;width: 20%;margin-left: 5%;text-align:center">
+      <Icon type="ios-contact-outline" size="100" style="float: left;margin-left: 5%;margin-top: 5%;color:#008de1"></Icon>
+      <p style="float: left;margin-left: 50%;margin-right: 50%;font-size: 18px;font-weight: bold" @click="jump(item.name)">{{item.name}}</p>
     </div>
   </div>
 </template>
@@ -34,10 +34,10 @@
 </script>
 
 <style scoped>
-  h1{
+  p{
     cursor: pointer;
   }
-  h1:hover{
-    color:red;
+  p:hover{
+    color:#006bc7;
   }
 </style>

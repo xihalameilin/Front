@@ -1,7 +1,7 @@
 <template>
   <div class="layout-ceiling">
     <div style="width:30%;float: left;margin-left: 38%;margin-top: 1.5%">
-      <h1 style="color:black;font-size: 30px;float: left;margin-left: 1%">南京大学日常活动查询系统</h1>
+      <h1 style="color:white;font-size: 30px;float: left;margin-left: 1%">南京大学日常活动查询系统</h1>
     </div>
     <div style="width:25%;float: left;float: left;margin-left: 40%;margin-top: 5px">
       <Input size="large" search enter-button placeholder="Enter something..." style="width:100%;float: left;margin-top: 2%;font-size: 20px;" v-model="keyword" @on-enter="jumpToInfo" @on-search="jumpToInfo" />
@@ -22,7 +22,7 @@
       <Dropdown @on-click="jumpToPersonal">
         <!--<Avatar size="large"  shape="circle" src="https://i.loli.net/2017/08/21/599a521472424.jpg" />-->
         <!--<Icon type="arrow-down-b" color="white"></Icon>-->
-        <a href="javascript:void(0)" style="color: black;font-size: 16px;width: 5px;font-weight: bold" @click="loginAppear">
+        <a href="javascript:void(0)" style="color: white;font-size: 16px;width: 5px;font-weight: bold" @click="loginAppear">
           {{content}}
           <Icon type="ios-arrow-down" v-show="flag"></Icon>
         </a>
