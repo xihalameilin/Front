@@ -56,7 +56,7 @@
         },
       methods:{
         pageChange(index){
-
+          alert("height:"+window.innerHeight+" width:"+window.innerWidth);
         }
       }
     }
