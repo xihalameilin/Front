@@ -4,8 +4,8 @@
       <div style="width: 60%;float: left">
         <br>
         <br>
-        <p style="font-size: 30px;margin-left: 10%">文章标题</p>
-        <p style="font-size: 20px;margin-left: 10%">文章的具体内容</p>
+        <p style="font-size: 30px;margin-left: 10%;text-align: center">文章标题</p>
+        <p style="font-size: 20px;margin-left: 10%;width:90%;word-wrap:break-word;text-align: left">文章的具体内容</p>
       </div>
       <!--右边的相关内容-->
       <div style="width: 30%;float: right;margin-right: 4%;margin-top: 2%" >
@@ -15,22 +15,17 @@
           <Button type="error" style="float: left;margin-left: 20.5%;margin-top: 5%" @click="addInterset">关注</Button>
         </div>
         <br>
-
         <div>
-          <h2 style="float: left">最新通知:</h2>
-          <div style="float:left;margin-left: 0%;margin-top: 2%;width:100%;height: 1px;border:  2px solid rgba(0,0,0,0.42)">
+          <h2 style="float: left;margin-left: 35%">最新通知:</h2>
+          <div style="float:left;margin-left: 0%;margin-top: 2%;width:100%;">
           </div>
-          <div v-for="item in articleList" style="float: left;width:100%;border:solid 1px black">
-            <h3 @click="jump(item.id)" style="font-size: 20px">{{item.title}}</h3>
-            <Icon type="md-eye" size="20"/>
-            {{item.count}}
+          <div v-for="item in articleList" style="float: left;width:100%;">
+            <h3 @click="jump(item.id)" style="float: left;margin-left: 3%;font-size: 20px;width:95%;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">{{item.title}}</h3>
+            <Icon title="热度" type="md-eye" size="20" style="float: left;;margin-top: 2%;margin-left: 35%"/>
+            <p title="热度" style="float: left;;margin-top: 2%;margin-left: 3%;font-size: 18px">{{item.count}}</p>
           </div>
         </div>
-
-
-        <p></p>
       </div>
-
     </div>
 </template>
 
@@ -42,7 +37,7 @@
           articleList:[
             {
               id:1,
-              title:'十二年手办官宣',
+              title:'12年手办官宣',
               count:2555
            },
             {
@@ -74,7 +69,6 @@
 </script>
 
 <style scoped>
-
   h3{
     cursor: pointer;
   }
