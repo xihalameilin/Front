@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Menu :theme="light" active-name="1" style="float: left;width:25%">
+    <Menu :theme="theme3" active-name="1" style="float: left;width:25%">
       <MenuGroup title="个人管理">
         <MenuItem name="1">
           <Icon type="md-heart" />
@@ -24,7 +24,7 @@
   export default {
     data () {
       return {
-        theme3: 'dark'
+        theme3: 'light'
       }
     }
   }

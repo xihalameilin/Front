@@ -8,29 +8,29 @@
 </template>
 
 <script>
-    export default {
-      data(){
-        return{
-          personList:[
-            {
-              name:'刘钦'
-            },
-            {
-              name:'刘志'
-            },
-            {
-              name:'陆梅临'
-            },
-          ]
-        }
-      },
+  export default {
+    data(){
+      return{
+        personList:[
+          {
+            name:'刘钦'
+          },
+          {
+            name:'刘志'
+          },
+          {
+            name:'陆梅临'
+          },
+        ]
+      }
+    },
 
-      methods:{
-        jump(name){
-          alert(name)
-        }
+    methods:{
+      jump(name){
+        alert(name)
       }
     }
+  }
 </script>
 
 <style scoped>

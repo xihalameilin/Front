@@ -2,13 +2,13 @@
   <div>
     <div class="shadow" v-for="item in items" style="width:60%;height:15%;border:solid 1px rgba(0,0,0,0.1);float: left;margin-top: 1.5%;margin-left: 6.25%">
       <Icon type="md-heart-outline" title="收藏" size="30" style="float: left;margin-left:2.34%;margin-top: 1.8%;color:#ff5f17;"/>
-      <p title="1000" style="float: left;margin-left: -4%;margin-top: 7.18%;font-size: 16px;color: #ff5f17">1000</p>
-      <p @click="showDetail(item.id)" class="href" title="这是标题" style="float: left;margin-left: 2.73%;margin-top: 0.9%;width:75%;overflow:hidden;text-overflow:ellipsis;white-space: nowrap;">这是标题啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦</p>
-      <p title="这是内容" style="float: left;margin-left: 3%;margin-top: 2%;width:70%;font-size: 16px;color:#657180;overflow:hidden;text-overflow:ellipsis;text-align: left;white-space: nowrap;">这是内容啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦</p>
-      <p style="float: left;margin-left:-70%;margin-top: 7%;font-size: 15px;color: #657180">发布人：lz</p>
-      <p style="float: left;margin-left: 10%;margin-top: 2%;font-size: 15px;color: #657180">发布时间：2019-05-26</p>
+      <p :title="item.hot" style="float: left;margin-left: -4%;margin-top: 7.18%;font-size: 16px;color: #ff5f17">{{item.hot}}</p>
+      <p @click="showDetail(item.id)" class="href" :title="item.title" style="float: left;margin-left: 2.73%;margin-top: 0.9%;width:75%;overflow:hidden;text-overflow:ellipsis;white-space: nowrap;">{{item.title}}</p>
+      <p :title="item.content" style="float: left;margin-left: 3%;margin-top: 2%;width:70%;font-size: 16px;color:#657180;overflow:hidden;text-overflow:ellipsis;text-align: left;white-space: nowrap;">{{item.content}}</p>
+      <p style="float: left;margin-left:-70%;margin-top: 7%;font-size: 15px;color: #657180">发布人：{{item.author}}</p>
+      <p style="float: left;margin-left: 10%;margin-top: 2%;font-size: 15px;color: #657180">发布时间：{{item.start}}</p>
       <Icon title="热度" type="md-eye" size="20" style="float: left;margin-left: 60%;margin-top: -3%;color: #657180"/>
-      <p title="热度" style="float: left;margin-left: 65%;margin-top: -3%;font-size: 15px;color: #657180">10000</p>
+      <p :title="item.hot" style="float: left;margin-left: 65%;margin-top: -3%;font-size: 15px;color: #657180">{{item.hot}}</p>
     </div>
     <div style="width:25%;height:60%;float: left;margin-left: 70%;margin-top: -29%">
       <p title="标签导航" style="float: left;margin-left: 4%;margin-top: 1%;font-size: 18px;font-weight: bold;color: black">标签导航</p>
@@ -39,35 +39,83 @@
         <Tag type="border" color="warning" style="float: left;margin-left: 6%;margin-top: 15%;font-size: 18px">未知</Tag>
       </div>
     </div>
-    <Page @on-change="pageChange" :total="100" page-size="10" show-elevator style="float: left;margin-left: 16%;margin-top: 6%;font-size: 16px"/>
+    <Page @on-change="pageChange" :total="total" :page-size="num" show-elevator style="float: left;margin-left: 16%;margin-top: 6%;font-size: 16px"/>
   </div>
 </template>
 
 <script>
-    export default {
-        data() {
-          return{
-            items:[
-              {id:'1',favourite:'',title:'',content:'',publisher:'',time:'',hot:''},
-              {},
-              {},
-            ]
-          }
-        },
-      methods:{
-        pageChange(index){
+  export default {
 
-        },
-        showDetail(id){
-          this.router.push({
-            name:'/detail',
-            params: {
-              id: id,
-            },
-          })
+    created(){
+      this.getCount()
+      this.getData(0)
+    },
+
+
+    data() {
+      return{
+        total:0,
+        num:5,
+        items:[
+          {id:'1',favourite:'',title:'',content:'',publisher:'',time:'',hot:''},
+          {},
+          {},
+        ]
+      }
+    },
+
+    computed:{
+      change(str){
+        console.log(str)
+        return function () {
+          if(str.length>15)
+            return str.substring(0,15)
+          else
+            return str
         }
       }
+    },
+    methods:{
+      getData(index){
+        var self = this
+        this.$http.get("api/getArticles/"+index)
+          .then(function (response) {
+            self.items = response.data
+          })
+      },
+      getCount(){
+        var self = this
+        this.$http.get("api/getTotal")
+          .then(function (response) {
+            self.total = response.data
+          })
+      },
+      jump(id){
+        alert("id为"+id+" 这里有待商榷")
+        var item = this.items[id]
+        this.router.push({
+          name:'detail',
+          params:{
+            id:item.id,
+
+
+          }
+        })
+      },
+      pageChange(index){
+        this.getData(index)
+
+      },
+      showDetail(id){
+        this.$router.push({
+          name:'detail',
+          params: {
+            id: id,
+          },
+        })
+      }
     }
+  }
 </script>
 
 <style scoped>

@@ -4,8 +4,8 @@
       <div style="width: 60%;float: left">
         <br>
         <br>
-        <p style="font-size: 30px;margin-left: 10%;text-align: center">文章标题</p>
-        <p style="font-size: 20px;margin-left: 10%;width:90%;word-wrap:break-word;text-align: left">文章的具体内容</p>
+        <p style="font-size: 30px;margin-left: 10%;width:90%;text-align: center;">{{article.title}}</p>
+        <p style="font-size: 20px;margin-left: 10%;width:90%;word-wrap:break-word;text-align: left">{{article.content}}</p>
         <div style="float: left;margin-left: 10%;width:90%">
           <Icon title="热度" type="md-eye" size="40" style="float: left;margin-left: 0%;margin-top: 0%;color: #657180"/>
           <p title="1000" style="float: left;margin-left: 3%;margin-top: 0%;font-size: 25px;color: #657180">1000</p>
@@ -19,8 +19,8 @@
       <div style="width: 30%;float: right;margin-right: 4%;margin-top: 2%" >
         <div style="background-color: rgb(245,245,245);height: 100px;border: 1px solid #b5b5b5" >
           <img src="../images/people.jpg" style="float: left;margin-left: 7%;margin-top: 10px;width:80px"/>
-          <h3 style="float: left;margin-left: 7%;margin-top: 4%;font-size: 20px">发布人的名字</h3>
-          <Button type="error" style="float: left;margin-left: 25%;margin-top: 2%" @click="addInterset">关注</Button>
+          <h3 style="float: left;margin-left: 7%;margin-top: 4%;font-size: 20px">{{article.author}}</h3>
+          <Button type="error" style="float: left;margin-left: 25%;margin-top: 2%" @click="addInterset">{{buttonContent}}</Button>
         </div>
         <br>
         <div>
@@ -38,50 +38,90 @@
 </template>
 
 <script>
-    export default {
+  export default {
+    created(){
+      //初始化得到id
+      this.id = this.$route.params.id
+      this.getDetailByID()
+    },
 
-      data(){
-        return {
-          articleList:[
-            {
-              id:1,
-              title:'12年手办官宣',
-              count:2555
-           },
-            {
-              id:2,
-              title:'50年手办官宣',
-              count:7825
-            },
-            {
-              id:3,
-              title:'70年手办官宣',
-              count:60
-            }],
-          tags:[
-            {tagName:'艺术'},
-            {tagName:'艺术'},
-            {tagName:'艺术'},
-            {tagName:'艺术'},
-            {tagName:'艺术'},
-            {tagName:'艺术'}
-          ]
-        }
+    data(){
+      return {
+        buttonContent:"关注",
+        flag:false,
+        id:0,
+        article:{},
+        articleList:[
+          {
+            id:1,
+            title:'12年手办官宣',
+            count:2555
+          },
+          {
+            id:2,
+            title:'50年手办官宣',
+            count:7825
+          },
+          {
+            id:3,
+            title:'70年手办官宣',
+            count:60
+          }],
+        tags:[
+          {tagName:'艺术'},
+          {tagName:'艺术'},
+          {tagName:'艺术'},
+          {tagName:'艺术'},
+          {tagName:'艺术'},
+          {tagName:'艺术'}
+        ]
+      }
+    },
+    methods:{
+
+      addCollection(){
+        var userID = this.$getCookie("userID")
+        alert(userID + "收藏" + this.article.id)
+        this.$http.post("api/addCollection/"+userID+"/"+this.id)
       },
-      methods:{
-        jump(id){
-          alert(id)
-        },
-        addInterset(){
-          alert('增加关注')
-        },
+      jump(id){
+        alert(id)
       },
-      computed:{
-          height(){
-            return window.innerHeight+'px'
-        }
+      addInterset(){
+        var userID = this.$getCookie("userID")
+        alert(userID + "订阅" + this.article.author)
+        this.$http.post("api/addInterset/"+userID+"/"+this.id)
+        this.buttonContent = "已关注"
+        this.flag = true
+      },
+
+      getDetailByID(){
+        var self = this
+        this.$http.get("/api/getArticleDetail/"+this.id)
+          .then(function (response) {
+            self.article = response.data
+            self.getTopFive()
+          })
+      },
+
+
+      getTopFive(){
+        var author = this.article.author
+        alert(author)
+        var self = this
+        this.$http.get("/api/getHotArticle/"+author)
+          .then(function (response) {
+            console.log(response.data)
+            self.articleList = response.data
+          })
+      }
+    },
+    computed:{
+      height(){
+        return window.innerHeight+'px'
       }
     }
+  }
 </script>
 
 <style scoped>

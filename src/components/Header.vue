@@ -104,8 +104,15 @@
       const validateRegisterUserID = (rule, value, callback) => {
         if (value === '') {
           callback(new Error('请输入用户名'));
-        }  else {
-          callback()
+        }
+        else{
+          this.$http.post("api/user/check/"+value)
+            .then(function (response) {
+              if(response.data === true)
+                callback()
+              else
+                callback(new Error('用户名已经被使用'));
+            })
         }
       };
 
@@ -162,18 +169,26 @@
       }
     },
     methods:{
-      jumpToInfo(){
-        alert("跳去搜索结果页，参数为keyword"+this.keyword)
+      jumpToDetail(){
+        var thisKeyWord = this.keyword
+        this.$router.push({
+          name: 'tagpage',
+          params:{
+            keyword:thisKeyWord
+          }
+        })
       },
 
       login(){
         this.flag=true
         this.loginShow=false
-        this.content = 'userID'
       },
       jumpToPersonal(content){
-          // 跳转去个人中心
+        // 跳转去个人中心
         alert("跳转去个人中心")
+        this.$router.push({
+          name:'usertag'
+        })
 
       },
 
@@ -190,6 +205,66 @@
       registerDisappear(){
         this.registerShow=false
       },
+      //登录方法
+      login(){
+        var self=this
+        var userID = this.formCustom.userID
+        var password = this.formCustom.password
+        this.$http.post('api/user/login/'+userID+"/"+password,{
+        })
+          .then(function (response) {
+            if(response.data<=0){
+              self.$Message.error("登录失败")
+            }
+            else{
+              self.$Message.success("登陆成功")
+              self.loginDisappear()
+              self.flag = true
+              self.$setCookie("userID",response.data,10)
+              self.content = userID
+            }
+          } )
+          .catch(function (error) {alert(error) })
+        // window.localStorage.removeItem("userID");
+        // //将userid保存到localstorage
+        // window.localStorage.setItem("userID",userID)
+
+      },
+
+      //注册
+      register(){
+        var userID = this.registerformCustom.registeruserID
+        var password = this.registerformCustom.registerPassword
+        alert(userID+password)
+        this.$http.post("api/user/register/"+userID+"/"+password)
+        this.registerDisappear()
+
+        // var params = new URLSearchParams();
+        // var array = []
+        // for(var i=0 ;i<this.data.length;i++){
+        //   array.push(this.data[i].address)
+        // }
+        // params.append("address",JSON.stringify(array))
+        // this.$http.post(api
+        //   + self.registerformCustom.registeruserID + '/'
+        //   + self.registerformCustom.registerEmail +  "/"
+        //   + self.registerformCustom.registerCode + "/"
+        //   + self.registerformCustom.registerPassword + "/"
+        //   + self.registerformCustom.registerTelephone,params)
+        //   .then(function (response) {
+        //     var flag = response.data
+        //     if (flag == false) {
+        //
+        //     } else {
+        //       self.changetag(0)
+        //     }
+        //   })
+        //   .catch(function (error) {
+        //     console.log(error)
+        //   })
+
+      },
+
       handleSubmit (name) {
         this.$refs[name].validate((valid) => {
           if (valid) {
