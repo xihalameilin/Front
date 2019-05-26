@@ -4,7 +4,7 @@
       <Icon type="ios-apps" size="50" color="white"/>
     </div>
     <div style="width:35%;float: left;margin-left: 0%;margin-top: 1%">
-      <h1 style="color: black;font-size: 30px;float: left;margin-left: 1%">南京大学日常活动查询系统</h1>
+      <h1 style="color:black;font-size: 30px;float: left;margin-left: 1%">南京大学日常活动查询系统</h1>
     </div>
     <div style="width:25%;float: left;float: left;margin-left: 5%;margin-top: 10px">
       <Input size="large" search enter-button placeholder="Enter something..." style="width:100%;float: left;margin-top: 2%;font-size: 20px;" v-model="keyword" @on-enter="jumpToInfo" @on-search="jumpToInfo" />
@@ -218,6 +218,11 @@
 </script>
 
 <style scoped>
+  .bg{
+    background-image: url('../images/njuLogo.png');
+    background-size: cover;
+    border: 1px solid white;
+  }
   .layout{
     border: 1px solid #d7dde4;
     background: #f5f7f9;
@@ -247,11 +252,17 @@
     color: #9ea7b4;
   }
   .layout-ceiling{
-    background: white;
+    /*background: white;*/
     padding: 10px 0;
     overflow: hidden;
-    height: 90px;
+    height: 150px;
     width: 100%;
+    opacity: 0.8;
+
+    background-image: url('../images/njuLogo.png');
+    background-size: cover;
+    border: 1px solid white;
+
   }
   .layout-ceiling-main{
     float: right;

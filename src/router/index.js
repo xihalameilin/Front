@@ -15,6 +15,7 @@ import header from '@/components/Header'
 import usertag from '@/components/UserTag'
 import message from '@/components/Message'
 import detail from '@/components/Detail'
+import concern from '@/components/Concern'
 
 Vue.use(Router)
 
@@ -24,6 +25,11 @@ export default new Router({
       path: '/',
       name: 'login',
       component: Login
+    },
+    {
+      path: '/concern',
+      name: 'concern',
+      component: concern
     },
     {
       path: '/detail',
