@@ -1,14 +1,13 @@
 <template>
   <div class="layout-ceiling">
-    <h1 style="float: left;color: white;font-size: 50px">Acfun</h1>
-    <div style="margin-left: 10%;width: 50px;height: 50px;float: left">
+    <div style="margin-left: 10%;margin-top: 0.8%;width: 50px;height: 50px;float: left">
       <Icon type="ios-apps" size="50" color="white"/>
     </div>
-    <div style="width:25%;float: left;float: left">
-      <h1 style="color: white;font-size: 30px;float: left">南京大学日常活动查询系统</h1>
+    <div style="width:35%;float: left;margin-left: 0%;margin-top: 1%">
+      <h1 style="color: black;font-size: 30px;float: left;margin-left: 1%">南京大学日常活动查询系统</h1>
     </div>
-    <div style="width:25%;float: left;float: left;margin-left: 50px;margin-top: 10px">
-      <Input search enter-button placeholder="Enter something..." style="float: left" v-model="keyword" @on-enter="jumpToInfo" @on-search="jumpToInfo" />
+    <div style="width:25%;float: left;float: left;margin-left: 5%;margin-top: 10px">
+      <Input size="large" search enter-button placeholder="Enter something..." style="width:100%;float: left;margin-top: 2%;font-size: 20px;" v-model="keyword" @on-enter="jumpToInfo" @on-search="jumpToInfo" />
     </div>
     <!--<div class="layout-ceiling-main" style="margin-left: 13%;float: left;" >-->
       <!--<a @click="loginAppear" style="font-size: 20px">登录</a>-->
@@ -22,11 +21,11 @@
       <!--</Tooltip>-->
     <!--</div>-->
 
-    <div style="float: left;margin-left: 10%;margin-top: 10px" >
+    <div style="float: left;margin-left: 12%;margin-top: 2%" >
       <Dropdown @on-click="jumpToPersonal">
         <!--<Avatar size="large"  shape="circle" src="https://i.loli.net/2017/08/21/599a521472424.jpg" />-->
         <!--<Icon type="arrow-down-b" color="white"></Icon>-->
-        <a href="javascript:void(0)" style="color: white;font-size: 20px;width: 5px" @click="loginAppear">
+        <a href="javascript:void(0)" style="color: black;font-size: 16px;width: 5px" @click="loginAppear">
           {{content}}
           <Icon type="ios-arrow-down" v-show="flag"></Icon>
         </a>
@@ -37,17 +36,15 @@
       </Dropdown>
     </div>
 
-
-
     <!--登录-->
       <Modal v-model="loginShow" footer-hide>
         <Form  ref="formCustom" :model="formCustom" :rules="ruleCustom" :label-width="80">
-          <FormItem label="用户名：" prop="userID" style="margin-top: 20px">
+          <FormItem label="用户名：" prop="userID" style="margin-left: 10%;margin-top: 5%;">
             <i-input type="text" v-model="formCustom.userID" style="width: 250px" >
               <Icon type="ios-person-outline" slot="prepend"></Icon>
             </i-input>
           </FormItem>
-          <FormItem label="密码：" prop="password">
+          <FormItem label="密码：" prop="password" style="margin-left: 10%;margin-top: 5%;">
             <i-input type="password" v-model="formCustom.password" style="width: 250px">
               <Icon type="ios-lock-outline" slot="prepend"></Icon>
             </i-input>
@@ -55,33 +52,33 @@
 
 
           <FormItem >
-            <Button type="primary" @click="handleSubmit('formCustom')" style="float: left" >登录</Button>
-            <Button type="primary" @click="registerAppear" style="float: left;margin-left: 5px" >注册</Button>
-            <Button  @click="handleReset('formCustom')" style="float: left;margin-left: 5px">重置</Button>
+            <Button type="primary" @click="handleSubmit('formCustom')" style="float: left;margin-left: 11.5%;margin-top: 4%" >登录</Button>
+            <Button type="primary" @click="registerAppear" style="float: left;margin-left: 10%;margin-top: 4%" >注册</Button>
+            <Button  @click="handleReset('formCustom')" style="float: left;margin-left: 10%;margin-top: 4%">重置</Button>
           </FormItem>
         </Form>
       </Modal>
 
     <Modal v-model="registerShow" footer-hide>
       <Form  ref="registerformCustom" :model="registerformCustom" :rules="ruleCustom" :label-width="80">
-        <FormItem label="用户名：" prop="registeruserID" style="margin-top: 20px">
+        <FormItem label="用户名：" prop="registeruserID" style="float: left;margin-left: 10%;margin-top: 2%">
           <i-input  type="text" v-model="registerformCustom.registeruserID" style="width: 250px" >
             <Icon type="ios-person-outline" slot="prepend"></Icon>
           </i-input>
         </FormItem>
-        <FormItem label="密码：" prop="registerPassword">
+        <FormItem label="密码：" prop="registerPassword" style="float: left;margin-left: 10%;margin-top: 2%">
           <i-input type="password" v-model="registerformCustom.registerPassword" style="width: 250px">
             <Icon type="ios-lock-outline" slot="prepend"></Icon>
           </i-input>
         </FormItem>
-        <FormItem label="密码确认：" prop="registerPasswordComfirm">
+        <FormItem label="密码确认：" prop="registerPasswordComfirm" style="float: left;margin-left: 10%;margin-top: 2%">
           <i-input type="password" v-model="registerformCustom.registerPasswordComfirm" style="width: 250px">
             <Icon type="ios-lock-outline" slot="prepend"></Icon>
           </i-input>
         </FormItem>
         <FormItem >
-          <Button type="primary" @click="handleSubmit('registerformCustom')" style="float: left" >注册</Button>
-          <Button  @click="handleReset('registerformCustom')" style="margin-left: 5%">重置</Button>
+          <Button type="primary" @click="handleSubmit('registerformCustom')" style="float: left;margin-left: -61%;margin-top: 20%" >注册</Button>
+          <Button  @click="handleReset('registerformCustom')" style="float: left;margin-left: -14%;margin-top: 20%">重置</Button>
         </FormItem>
       </Form>
     </Modal>
@@ -250,7 +247,7 @@
     color: #9ea7b4;
   }
   .layout-ceiling{
-    background: #464c5b;
+    background: white;
     padding: 10px 0;
     overflow: hidden;
     height: 90px;
