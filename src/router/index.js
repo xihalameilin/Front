@@ -1,16 +1,19 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
-
 import Login from '@/components/Login'
 import home from '@/components/Home'
 import loading from '@/components/Loading'
 import table from '@/components/Table'
 
+import list from '@/components/List'
+
 import page1 from '@/components/Page1'
 import page2 from '@/components/Page2'
 import page3 from '@/components/Page3'
 import page21 from '@/components/Page21'
+import header from '@/components/Header'
+import usertag from '@/components/UserTag'
+import message from '@/components/Message'
 
 Vue.use(Router)
 
@@ -20,6 +23,26 @@ export default new Router({
       path: '/',
       name: 'login',
       component: Login
+    },
+    {
+      path: '/list',
+      name: 'list',
+      component: list
+    },
+    {
+      path: '/message',
+      name: 'message',
+      component: message
+    },
+    {
+      path: '/usertag',
+      name: 'usertag',
+      component: usertag
+    },
+    {
+      path: '/header',
+      name: 'header',
+      component: header
     },
 
     {
